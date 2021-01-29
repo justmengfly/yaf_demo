@@ -1,0 +1,8 @@
+{
+	"name" : "yidian/yaf_demo",
+	"autoload" : {
+		"psr-4" : {
+			"app\\" : "application"
+		}
+	}
+}
