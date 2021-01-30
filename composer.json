@@ -1,9 +1,13 @@
 {
     "name": "yidian/yaf_demo",
-    "require": {},
+    "require": {
+    },
     "autoload": {
         "psr-4": {
-            "app\\": "application"
+            "plugins\\" : "application/plugins",
+            "services\\": "application/services",
+            "models\\"  : "application/models",
+            "base\\"  : "application/modules/base"
         }
     }
 }
