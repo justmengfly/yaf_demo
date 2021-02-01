@@ -21,9 +21,5 @@
         "sort-packages": true
     },
     "repositories": {
-        "packagist": {
-            "type": "vcs",
-            "url": "https://git.yidian-inc.com:8021/zhangxiaojing/yaf_demo.git"
-        }
     }
 }
