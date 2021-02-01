@@ -1,6 +1,6 @@
 <?php
 
-use APP\Base\Base;
+use App\Base\Base;
 
 class TestController extends Base
 {

@@ -14,7 +14,9 @@ class ErrorController extends Controller_Abstract
             case YAF\ERR\NOTFOUND\ACTION:
             case YAF\ERR\NOTFOUND\VIEW:
                 // log
-                echo 'error';
+                //LogUtil::ERROR('error code'.$exc->getCode(), '', $exc);
+                print_r($exception);
+                echo json_encode(['status' => 'failed', 'reason' => 'reason', 'code' => -1]);
                 return false;
                 break;
             // 错误页面展示错误
