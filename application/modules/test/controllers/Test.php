@@ -2,12 +2,10 @@
 
 use base\Base;
 
-class InfoController extends Base
+class TestController extends Base
 {
     public function IndexAction() {
-        if(Tool\Http::get()){
-            $user = (new models\User())->getUserData();
-        }
+        $user = (new models\User())->getUserData();
         $res = [
             "data" => $user,
             "code" => 0
