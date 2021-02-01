@@ -57,8 +57,8 @@ class Bootstrap extends Bootstrap_Abstract {
     
     public function _initPlugin(Dispatcher $dispatcher) {
         //注册一个插件
-        //$objSamplePlugin = new Hook();
-        //$dispatcher->registerPlugin($objSamplePlugin);
+        $objSamplePlugin = new Hook();
+        $dispatcher->registerPlugin($objSamplePlugin);
     }
     
     public function _initRoute(Dispatcher $dispatcher) {

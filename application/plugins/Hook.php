@@ -1,6 +1,6 @@
 <?php
 
-namespace APP\Plugins;
+namespace App\Plugins;
 
 
 class Hook extends \Yaf\Plugin_Abstract {
