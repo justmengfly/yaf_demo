@@ -1,14 +1,29 @@
 {
     "name": "yidian/yaf_demo",
+    "type": "project",
+    "license": "MIT",
     "require": {
-      "ext-json": "*"
+        "php": ">=7.2",
+        "ext-json": "*"
     },
+    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
             "plugins\\" : "application/plugins",
             "services\\": "application/services",
             "models\\"  : "application/models",
             "base\\"  : "application/modules/base"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "repositories": {
+        "packagist": {
+            "type": "vcs", 
+            "url": "https://git.yidian-inc.com:8021/zhangxiaojing/yaf_demo.git" 
         }
     }
 }
