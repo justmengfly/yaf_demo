@@ -3,15 +3,16 @@
 	"require" : {
 		"ext-json" : "*",
 		"monolog/monolog" : "^2.2",
-		"psr/container": "^1.0",
-		"psr/http-message": "^1.0"
+		"psr/container" : "^1.0",
+		"psr/http-message" : "^1.0"
 	},
 	"autoload" : {
 		"psr-4" : {
-			"APP\\Plugins\\" : "application/plugins",
-			"APP\\Services\\" : "application/services",
-			"APP\\Models\\" : "application/models",
-			"APP\\Base\\" : "application/modules/base"
+			"App\\Plugins\\" : "application/plugins",
+			"App\\Services\\" : "application/services",
+			"App\\Models\\" : "application/models",
+			"App\\Base\\" : "application/modules/base",
+			"App\\Library\\" : "application/library"
 		}
 	}
 }
