@@ -1,6 +1,6 @@
 <?php
 
-use base\Cli;
+use APP\Base\Cli;
 
 class TestController extends Cli
 {

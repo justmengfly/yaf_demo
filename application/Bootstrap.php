@@ -3,7 +3,7 @@
 use Yaf\Bootstrap_Abstract;
 use Yaf\Dispatcher;
 use App\Library\Register;
-use plugins\Hook;
+use App\Plugins\Hook;
 
 class Bootstrap extends Bootstrap_Abstract {
     
