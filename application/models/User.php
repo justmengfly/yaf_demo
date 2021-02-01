@@ -9,7 +9,8 @@ class User {
     
     public function getUserData() {
         return [
-            "zhangsan" => 18
+            "name" => "zhangsan",
+            "age" => 18
         ];
     }
 }

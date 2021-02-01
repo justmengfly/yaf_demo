@@ -1,6 +1,7 @@
 {
     "name": "yidian/yaf_demo",
     "require": {
+      "ext-json": "*"
     },
     "autoload": {
         "psr-4": {
