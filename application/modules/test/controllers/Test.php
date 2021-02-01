@@ -1,11 +1,11 @@
 <?php
 
-use base\Base;
+use APP\Base\Base;
 
 class TestController extends Base
 {
     public function IndexAction() {
-        $user = (new models\User())->getUserData();
+        $user = (new APP\Models\User())->getUserData();
         $res = [
             "data" => $user,
             "code" => 0

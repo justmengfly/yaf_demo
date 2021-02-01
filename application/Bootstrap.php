@@ -1,6 +1,6 @@
 <?php
 
-use plugins\Hook;
+use APP\Plugins\Hook;
 
 
 class Bootstrap extends \Yaf\Bootstrap_Abstract {

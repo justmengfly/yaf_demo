@@ -1,6 +1,6 @@
 <?php
 
-namespace base;
+namespace APP\Base;
 
 use Yaf\Controller_Abstract;
 
