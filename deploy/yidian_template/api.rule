@@ -1,0 +1,18 @@
+DIR=`dirname $0`
+
+cp $DIR/deploy.php /home/services/api.go2yd.com/htdocs/Website/deploy.php
+
+mkdir -p /etc/php-fpm.d
+mkdir -p /home/nginx
+
+# 处理nginx
+cp $DIR/nginx/api.go2yd.com.conf /etc/nginx/conf.d/api.go2yd.com.conf
+cp $DIR/nginx/nginx.conf /etc/nginx/nginx.conf
+
+
+# 处理fpm
+cp $DIR/php/php-fpm.conf /etc/php-fpm.conf
+cp $DIR/php/api.go2yd.com.conf /etc/php-fpm.d/api.go2yd.com.conf
+
+mv /etc/php.ini /etc/php.ini.backup
+cp $DIR/php/php.ini /etc/php.ini
