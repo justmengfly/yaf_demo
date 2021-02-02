@@ -13,12 +13,7 @@ abstract class Base extends Controller_Abstract
      */
     public function success($data = [], $headers = [])
     {
-        if ($this->arrayDepth($data) == 1 && !empty($data)) {
-            $data = [
-                $data
-            ];
-        }
-        return $this->respond(0, "success", '', compact('data'), $headers);
+        return $this->respond(0, "success", '', $data), $headers);
     }
 
     /**
@@ -43,32 +38,14 @@ abstract class Base extends Controller_Abstract
         if($reason) {
             $resp['reason'] = $reason;
         }
-        $data = array_merge($resp, $data);
+        if($data) {
+            $data = array_merge($resp, $data);
+        }
         $response = $this->getResponse();
         $response->setHeader('content-type', 'application/json');
         if($headers) {
-            foreach($headers as $name => $value) {
-                $response->setHeader($name, $value);
-            }
+            $response->setAllHeaders($headers);
         }
         return $response->setBody(json_encode($data));
-    }
-
-    public function arrayDepth($array)
-    {
-        if (! is_array($array)) {
-            return 0;
-        }
-        $max_depth = 1;
-        foreach ($array as $value) {
-            if (is_array($value)) {
-                $depth = self::arrayDepth($value) + 1;
-                
-                if ($depth > $max_depth) {
-                    $max_depth = $depth;
-                }
-            }
-        }
-        return $max_depth;
     }
 }
