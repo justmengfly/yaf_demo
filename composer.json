@@ -4,7 +4,9 @@
     "license": "MIT",
     "require": {
         "php": ">=7.2",
-        "ext-json": "*"
+        "ext-json": "*",
+        "api/php_utils":"dev-master",
+        "api/php_services":"dev-master"
     },
     "minimum-stability": "dev",
     "autoload": {
@@ -21,5 +23,13 @@
         "sort-packages": true
     },
     "repositories": {
+        "api/php_utils":{
+            "type":"vcs",
+            "url":"https://git.yidian-inc.com:8021/api0/php_utils.git"
+        },
+        "api/php_services":{
+            "type":"vcs",
+            "url":"https://git.yidian-inc.com:8021/api0/php_services.git"
+        }
     }
 }
