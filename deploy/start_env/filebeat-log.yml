@@ -1,0 +1,72 @@
+
+###################### Filebeat Configuration #########################
+
+filebeat.inputs:
+
+- type: log
+
+  paths:
+    - /home/services/api.go2yd.com/logs/fpm-error.log
+
+  fields:
+    log_type: 'fpm-error_log'
+    service_name: 'api.go2yd.com'
+  fields_under_root: false
+
+- type: log
+
+  paths:
+    - /home/services/api.go2yd.com/logs/fpm-slow.log
+
+  multiline.pattern: '^$'
+  multiline.negate: true
+  multiline.match: after
+
+  fields:
+    log_type: 'fpm-slowlog'
+    service_name: 'api.go2yd.com'
+  fields_under_root: false
+
+- type: log
+
+  paths:
+    - /home/services/api.go2yd.com/logs/php-error.log
+
+  multiline.pattern: '^\[\d{2}-'
+  multiline.negate: true
+  multiline.match: after
+
+  fields:
+    log_type: 'php-error_log'
+    service_name: 'api.go2yd.com'
+  fields_under_root: false
+
+#- type: log
+#
+#  paths:
+#    - /home/services/api.go2yd.com/logs/access.log
+#
+#  fields:
+#    log_type: 'fpm-access_log'
+#    service_name: 'a1.go2yd.com'
+#  fields_under_root: false
+
+#output.logstash:
+  #hosts: ["log.transfer.v.yidian-inc.com:5044"]
+  #hosts: ["10.126.154.124:5044"]
+  #hosts: ["172.29.60.5:5044"]
+
+output.kafka:
+  enable: true
+  hosts: ["10.103.17.40:8091", "10.103.17.41:8091", "10.103.17.42:8091", "10.103.17.43:8091", "10.103.32.28:8091", "10.103.32.29:8091", "10.120.187.37:8091", "10.120.187.38:8091", "10.120.187.39:8091"]
+  topic: "%{[fields.log_type]}"
+  codec.format:
+    string: "%{[fields.service_name]}|${HOSTNAME} %{[message]}"
+
+logging.level: warning
+logging.to_files: true
+logging.files:
+  path: /home/services/api.go2yd.com/logs
+  name: filebeat.log
+  rotateeverybytes: 52428800
+  keepfiles: 7
