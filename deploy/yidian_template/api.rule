@@ -1,7 +1,5 @@
 DIR=`dirname $0`
 
-cp $DIR/deploy.php /home/services/api.go2yd.com/htdocs/Website/deploy.php
-
 mkdir -p /etc/php-fpm.d
 mkdir -p /home/nginx
 

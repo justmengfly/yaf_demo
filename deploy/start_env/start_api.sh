@@ -42,12 +42,12 @@ if [ "${environment}" != "local" ]; then
     cd /home/services/recipe/$cnt_env && sh api.rule && cd -
 fi
 
-# choose the php ini file for different env
-if [ X"${environment}" == X"a3-local" ]; then
-    mv /home/services/ini/php-a3-local.ini /etc/php.ini
-else
-    mv /home/services/ini/php-local.ini /etc/php.ini
-fi
+# 更新ipip数据
+cd /home/services/api.go2yd.com/htdocs/Website/data && wget http://10.103.17.28/ipip/ipdata_ipv6v4_2in1.ipdb.zip && unzip -o ipdata_ipv6v4_2in1.ipdb.zip && rm -f ipdata_ipv6v4_2in1.ipdb.zip && cd -
+
+
+mv `dirname $0`/ini/php.ini /etc/php.ini
+
 
 # performance profiler
 if [ X"${environment}" == X"a3-local" ]; then
@@ -73,6 +73,11 @@ mv /etc/anacrontab /etc/anacrontab.bak  # 取消系统调度logrotate，采用�
 #crontab
 nohup /usr/sbin/crond >crond.nohup &
 crontab /home/services/crontab.conf
+#修改anacrontab为每天0到24点运行,延迟5分钟,anacrontab作用为防止crontab运行失败
+# sed -i "s/START_HOURS_RANGE=3-22/START_HOURS_RANGE=0-24/g" /etc/anacrontab
+# sed -i "s/RANDOM_DELAY=45/RANDOM_DELAY=5/g" /etc/anacrontab
+# cp -f /home/services/logrotate.daily /etc/cron.daily/logrotate
+# chmod 700 /etc/cron.daily/logrotate
 
 #create the log file, fix dir permissions
 if [ ! -d "/etc/php-fpm.d/" ]; then
@@ -96,10 +101,11 @@ chown -R nobody:nobody /home/services/api.go2yd.com/logs
 #add apc.php to the web root
 cp -f /home/services/apc.php /home/services/api.go2yd.com/htdocs/Website/debug/apc.php
 
-
 #delete local_deploy
 rm -rf /home/services/api.go2yd.com/htdocs/Website/local_deploy
 
+# 根据不同环境修改filebeat配置文件中service_name配置, service_name决定该环境下的日志最终在日志服务器上所在的目录
+# php-error.log access.log slow.log仅区分环境
 sed -i "s/service_name: 'api.go2yd.com'/service_name: '${environment}.go2yd.com'/g" filebeat-log.yml
 # filebeat start
 chmod go-w /home/services/filebeat-log.yml
@@ -114,7 +120,7 @@ while true; do
     sh api_checker/api_checker.sh ${port} # 检测php-fpm是否启动成功
     if [ "$?" != 0 ]; then
         if [ ! -f /home/services/api.go2yd.com/logs/start_script.done ]; then
-            exit 2
+            exit 1
         else
             kill $fpm_pid
             sleep 10
@@ -123,5 +129,5 @@ while true; do
         touch /home/services/api.go2yd.com/logs/start_script.done
     fi
     wait $fpm_pid
-    exit 3
+    exit 1
 done;

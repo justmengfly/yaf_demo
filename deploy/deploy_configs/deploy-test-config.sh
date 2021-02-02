@@ -30,7 +30,7 @@ DOCKER_VOLUMN_MAPS="
 "
 
 # Other docker run options
-DOCKER_RUN_OPTIONS="--cap-add SYS_PTRACE --privileged"
+DOCKER_RUN_OPTIONS="--cap-add SYS_PTRACE --restart=always --privileged"
 # Image name
 IMAGE_NAME="docker2.yidian.com:5000/publish/${COMMIT_JOB}-${COMMIT_NUMBER}-image"
 # This is for stopping container, kill sepicify process inside the container before 'docker stop' and 'docker rm'
