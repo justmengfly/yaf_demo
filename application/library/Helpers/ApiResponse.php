@@ -50,7 +50,8 @@ trait ApiResponse
             }
         }
 
-        $response = $this->getResponse();
+        //$response = $this->getResponse();
+        $response = \Yaf\Dispatcher::getInstance()->getResponse();
         $response->setHeader('content-type', 'application/json');
 
         if ($data) {
