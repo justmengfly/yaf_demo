@@ -4,8 +4,23 @@ namespace App\Base;
 use Yaf\Controller_Abstract;
 abstract class Base extends Controller_Abstract
 {
+
+    public function requestAll()
+    {
+        $request = $this->getRequest()->getRequest();
+        if($this->getRequest()->isPost()) {
+            $jsonPost = file_get_contents("php://input");
+            if($jsonPost) {
+                $request = array_merge($request, json_decode($jsonPost, true));
+                //$request = array_replace_recursive($request, json_decode($jsonPost, true));
+            }
+        }
+        return $request;
+    }
+
+
     /**
-     * 成功返回统一格式，data始终为数组，data内容为对象
+     * 成功返回格式
      *
      * @param array $data
      * @param array $headers $headers['content-type'] = 'application/json'
@@ -17,7 +32,7 @@ abstract class Base extends Controller_Abstract
     }
 
     /**
-     * 失败返回统一格式，有失败原因，失败返加data为空数组
+     * 失败返回格式，有失败原因
      *
      * @param [type] $code
      * @param string $reason
