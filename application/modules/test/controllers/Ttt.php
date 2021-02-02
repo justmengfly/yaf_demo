@@ -1,67 +1,39 @@
 <?php
 
 use App\Base\Base;
-
-/**
-
-{
-  "code": 0,
-  "status": "success",
-  "data": [
-    {
-      "key1": "user",
-      "key2": 0
-    }
-  ]
-}
-
-{
-  "code": -1,
-  "status": "failed",
-  "reason": "reason"
-}
-
-curl -X POST \
-  http://yaf.com/test/ttt/index\?a\=123 \
-  -H 'cache-control: no-cache' \
-  -H 'content-type: application/json' \
-  -H 'postman-token: 4fb007a9-ae09-6dd1-996b-0134f92b5e2d' \
-  -d '{
-  "created":"1485277341",
-  "key":"this_is_a_secret"
-}'
-array(1) {
-  ["a"]=>
-  string(3) "123"
-}
-string(56) "{
-  "created":"1485277341",
-  "key":"this_is_a_secret"
-}"
-array(3) {
-  ["a"]=>
-  string(3) "123"
-  ["created"]=>
-  string(10) "1485277341"
-  ["key"]=>
-  string(16) "this_is_a_secret"
-}
-
- */
+use Helpers\Aes;
 class TttController extends Base
 {
+
     public function IndexAction() {
 
-      $http = $this->getRequest()->getRequest();
-      var_dump($http);
-      var_dump(file_get_contents("php://input"));
-      var_dump($this->requestAll());
-      exit;
+      // var_dump($this->response);
+      // var_dump(Yaf\Dispatcher::getInstance()->getResponse());
+      // exit;
+      
+      // $data = ['appid'=> 'appid', 'verison'=>'023200', 'ts' => ceil(microtime(true) * 1000)];
+      // echo $sign = Aes::createSign($data);
+      // exit;
+
+      // $data = ['appid'=> 'appid', 'verison'=>'023200'];
+      // $data['sign'] = 'uzMLtTjyGCcsSFVsXN6j6Um0SGvsQNvuJF3LD2eW-Y2R5ZOuRPlDKzUmaoak-Xy-';
+      // $sign = Aes::checkSign($data);
+      // var_dump($sign);
+      // exit;
+      
+      // $obj = new App\Models\User();
+      // print_r($obj->getUserData());//Array ( [name] => zhangsan [age] => 18 )
+      // exit;
+      // $http = $this->getRequest()->getRequest();
+      // var_dump($http);
+      // var_dump(file_get_contents("php://input"));
+      // var_dump($this->requestAll());yaf
+      // exit;
       $res = [
-          "key1" => 'user',
-          "key2" => 0
+          "userid" => 'user',
+          "code" => 0
       ];
-      print_r($this->failed(-1,'reason'));
+      // print_r($this->failed(-1,'reason'));
       $this->success($res);
     }
 }

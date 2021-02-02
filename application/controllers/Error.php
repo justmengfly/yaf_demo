@@ -7,7 +7,9 @@ class ErrorController extends Controller_Abstract
 
     public function errorAction($exception)
     {
-        var_dump($exception);exit();
+        if (\Yaf\Application::app()->environ() == 'dev') {
+            var_dump($exception);exit();
+        }
         if ($exception->getPrevious() !== NULL) {
             $exception = $exception->getPrevious();
         }
