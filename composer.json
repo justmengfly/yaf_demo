@@ -8,8 +8,7 @@
 			"App\\Plugins\\" : "application/plugins",
 			"App\\Services\\" : "application/services",
 			"App\\Models\\" : "application/models",
-			"App\\Base\\" : "application/modules/base",
-			"App\\Library\\" : "application/library"
+			"App\\Base\\" : "application/modules/base"
 		}
 	}
 }
