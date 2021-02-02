@@ -61,7 +61,7 @@ class TttController extends Base
           "key1" => 'user',
           "key2" => 0
       ];
-      //print_r($this->failed(-1,'reason'));
-        // $this->success($res);
+      print_r($this->failed(-1,'reason'));
+      $this->success($res);
     }
 }
