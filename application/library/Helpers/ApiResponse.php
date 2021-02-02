@@ -49,8 +49,8 @@ trait ApiResponse
         $response = $this->getResponse();
         $response->setHeader('content-type', 'application/json');
         
-        $apiHeader = "";
         if ($data) {
+            $apiHeader = "";
             if (isset($data['code'])) {
                 $apiHeader = $apiHeader . strval($data['code']);
             }
