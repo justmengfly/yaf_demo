@@ -1,17 +1,16 @@
 <?php
 
 use App\Base\Base;
+use Validate\TestValidate;
 
 class TestController extends Base
 {
     public function IndexAction() {
-        $user = (new APP\Models\User())->getUserData();
-        $res = [
-            "data" => $user,
-            "code" => 0
-        ];
-        $response = $this->getResponse();
-        $response->setHeader('content-type', 'application/json');
-        $response->setBody(json_encode($res));
+        $validate = (new TestValidate())->scene('add')->validate();
+        if(is_array($validate)){
+            $this->failed(-1, $validate);
+            return;
+        }
+        $this->success(["a"=>1]);
     }
 }

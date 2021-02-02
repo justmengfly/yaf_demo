@@ -7,10 +7,12 @@ trait ApiResponse
     /**
      * 成功返回格式
      *
-     * @param array $data            
+     * @param array $data
+     * @param string $status
      * @param array $headers
      *            $headers['content-type'] = 'application/json'
      * @return void
+     * @throws \Exception
      */
     public function success($data = [], $status = "success", $headers = [])
     {
@@ -20,10 +22,11 @@ trait ApiResponse
     /**
      * 失败返回格式，有失败原因
      *
-     * @param [type] $code            
-     * @param string $reason            
-     * @param array $headers            
+     * @param [type] $code
+     * @param string $reason
+     * @param array $headers
      * @return void
+     * @throws \Exception
      */
     public function failed($code, $status = "failed", $reason = '', $headers = [])
     {
@@ -39,16 +42,17 @@ trait ApiResponse
         if ($reason) {
             $resp['reason'] = $reason;
         }
+
         if ($data && ! is_array($data)) {
             $data = json_decode(strval($data), true);
             if ($$data === NULL) {
                 throw new \Exception('非json格式', 13);
             }
         }
-        
+
         $response = $this->getResponse();
         $response->setHeader('content-type', 'application/json');
-        
+
         if ($data) {
             $apiHeader = "";
             if (isset($data['code'])) {
@@ -63,7 +67,7 @@ trait ApiResponse
                 $response->setHeader('Api-Result', $apiHeader);
             }
         }
-        
+
         // headder中输出主要依赖服务的处理时间
         if (isset($GLOBALS['DEPENDENT-REQUEST-TIME'])) {
             $response->setHeader('Dependent-Request-Time', $GLOBALS['DEPENDENT-REQUEST-TIME']);
@@ -81,6 +85,7 @@ trait ApiResponse
             }
         }
         $data = array_merge($resp, $data);
-        return $response->setBody(json_encode($data));
+        $response->setBody(json_encode($data));
+        return;
     }
 }
