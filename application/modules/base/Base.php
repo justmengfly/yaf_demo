@@ -13,7 +13,7 @@ abstract class Base extends Controller_Abstract
      */
     public function success($data = [], $headers = [])
     {
-        return $this->respond(0, "success", '', $data), $headers);
+        return $this->respond(0, "success", '', $data, $headers);
     }
 
     /**
@@ -44,7 +44,9 @@ abstract class Base extends Controller_Abstract
         $response = $this->getResponse();
         $response->setHeader('content-type', 'application/json');
         if($headers) {
-            $response->setAllHeaders($headers);
+            foreach($headers as $name => $value) {
+                $response->setHeader($name, $value);
+            }
         }
         return $response->setBody(json_encode($data));
     }
