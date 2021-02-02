@@ -38,9 +38,7 @@ abstract class Base extends Controller_Abstract
         if($reason) {
             $resp['reason'] = $reason;
         }
-        if($data) {
-            $data = array_merge($resp, $data);
-        }
+        $data = array_merge($resp, $data);
         $response = $this->getResponse();
         $response->setHeader('content-type', 'application/json');
         if($headers) {
