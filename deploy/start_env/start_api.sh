@@ -26,8 +26,8 @@ fi
 if [ ! -d "/var/run/php-fpm/" ]; then
   mkdir /var/run/php-fpm/
 fi
-\cp -f `dirname $0`/php-fpm.conf /etc/php-fpm.conf
-\cp -f `dirname $0`/api.go2yd.com.conf /etc/php-fpm.d/api.go2yd.com.conf
+\cp -f /home/services/api.go2yd.com/htdocs/Website/deploy/start_env/php-fpm.conf /etc/php-fpm.conf
+\cp -f /home/services/api.go2yd.com/htdocs/Website/deploy/start_env/api.go2yd.com.conf /etc/php-fpm.d/api.go2yd.com.conf
 
 # 宿主机ip不一定为172.17.0.1
 if [ -z "${YIDIAN_LOCAL_IP}" ]; then
@@ -37,16 +37,16 @@ else
 fi
 
 # replace config codes
-if [ "${environment}" != "local" ]; then
-    cnt_env=${environment}
-    cd /home/services/recipe/$cnt_env && sh api.rule && cd -
-fi
+# if [ "${environment}" != "local" ]; then
+#     cnt_env=${environment}
+#     cd /home/services/recipe/$cnt_env && sh api.rule && cd -
+# fi
 
 # choose the php ini file for different env
 if [ X"${environment}" == X"a3-local" ]; then
-    mv /home/services/ini/php-a3-local.ini /etc/php.ini
+    mv /home/services/api.go2yd.com/htdocs/Website/deploy/start_env/ini/php-a3-local.ini /etc/php.ini
 else
-    mv /home/services/ini/php-local.ini /etc/php.ini
+    mv /home/services/api.go2yd.com/htdocs/Website/deploy/start_env/ini/php-local.ini /etc/php.ini
 fi
 
 # performance profiler
@@ -94,7 +94,7 @@ chmod -R 777 /home/services/api.go2yd.com/logs
 chown -R nobody:nobody /home/services/api.go2yd.com/logs
 
 #add apc.php to the web root
-cp -f /home/services/apc.php /home/services/api.go2yd.com/htdocs/Website/debug/apc.php
+cp -f /home/services/api.go2yd.com/htdocs/Website/deploy/start_env/apc.php /home/services/api.go2yd.com/htdocs/Website/debug/apc.php
 
 
 #delete local_deploy
@@ -111,7 +111,7 @@ while true; do
     sleep 5
     #docker stop优雅关闭php-fpm
     trap "kill -3 $fpm_pid;exit 0" 15
-    sh api_checker/api_checker.sh ${port} # 检测php-fpm是否启动成功
+    #sh api_checker/api_checker.sh ${port} # 检测php-fpm是否启动成功
     if [ "$?" != 0 ]; then
         if [ ! -f /home/services/api.go2yd.com/logs/start_script.done ]; then
             exit 2
