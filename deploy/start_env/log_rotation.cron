@@ -1,4 +1,0 @@
-0 0 * * * source ~/.bash_profile; cd /home/services/;sh log_rotation.sh api access.log 4 > /dev/null 2>&1
-0 0 * * * source ~/.bash_profile; cd /home/services/;sh log_rotation.sh api error.log 4 > /dev/null 2>&1
-0 0 * * * source ~/.bash_profile; cd /home/services/;sh log_rotation.sh api fpm-slow.log 4 > /dev/null 2>&1
-0 0 * * * source ~/.bash_profile; cd /home/services/;sh log_rotation.sh api php-error.log 4 > /dev/null 2>&1
