@@ -11,12 +11,12 @@ class TttController extends Base
       // var_dump(Yaf\Dispatcher::getInstance()->getResponse());
       // exit;
       
-      // $data = ['appid'=> 'appid', 'verison'=>'023200', 'ts' => ceil(microtime(true) * 1000)];
+      // $data = ['appid'=> 'appid', 'verison'=>'023200', 'reqid'=>'111', 'platform'=>'1', 'ts' => ceil(microtime(true) * 1000)];
       // echo $sign = Aes::createSign($data);
       // exit;
 
-      // $data = ['appid'=> 'appid', 'verison'=>'023200'];
-      // $data['sign'] = 'uzMLtTjyGCcsSFVsXN6j6Um0SGvsQNvuJF3LD2eW-Y2R5ZOuRPlDKzUmaoak-Xy-';
+      // $data = ['appid'=> 'appid', 'verison'=>'023200', 'reqid'=>'111', 'platform'=>'1'];
+      // $data['sign'] = 'l4lBCE3B_v-ODFeuoxFksl0IUY9ehBnjN_FtU3ESdrn_bMPDsEIxA8IUw0pDJ_kX06P6OOw23in46acBucgceSBE2Vx3Ew52w3FfmRn8IhE';
       // $sign = Aes::checkSign($data);
       // var_dump($sign);
       // exit;

@@ -74,16 +74,29 @@ class Aes {
      * @return boolen
      */
     public static function checkSign($data) {
+        if(!isset($data['sign']) 
+            || empty($data['sign'])
+            || !isset($data['reqid'])
+            || !isset($data['appid'])
+            || !isset($data['platform'])
+        ) {
+            return false;
+        }
         $str = self::decrypt($data['sign']);
 
         if(empty($str)) {
             return false;
         }
 
-        // diid=xx&app_type=3
+        // appid=xx&version=023300&....
         parse_str($str, $arr);
-        if(!is_array($arr) || empty($arr['appid'])
+        if(!is_array($arr) 
+            || !isset($arr['reqid'])
+            || !isset($arr['appid'])
+            || !isset($arr['platform'])
+            || $arr['reqid'] != $data['reqid']
             || $arr['appid'] != $data['appid']
+            || $arr['platform'] != $data['platform']
         ) {
             return false;
         }

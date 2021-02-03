@@ -23,11 +23,13 @@ abstract class Base extends Controller_Abstract
      */
     protected $needLogin = false;
     
-    protected function init() {
+    public function init() {
         if ($this->needSgin) {
             $data = $this->getRequest()->getRequest();
             if(! Aes::checkSign($data)) {
-                $this->failed(10, 'failed', '签名校验失败');
+                // echo 3;exit;
+                throw new \Exception('签名校验失败', 15);
+                // var_dump($ret);exit;
             }
         }
         

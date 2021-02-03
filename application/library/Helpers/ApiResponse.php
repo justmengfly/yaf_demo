@@ -86,7 +86,6 @@ trait ApiResponse
             }
         }
         $data = array_merge($resp, $data);
-        $response->setBody(json_encode($data));
-        return;
+        return $response->setBody(json_encode($data));
     }
 }

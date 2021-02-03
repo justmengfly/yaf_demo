@@ -8,7 +8,7 @@ class ErrorController extends Controller_Abstract
     public function errorAction($exception)
     {
         if (\Yaf\Application::app()->environ() == 'dev') {
-            var_dump($exception);exit();
+            // var_dump($exception);
         }
         if ($exception->getPrevious() !== NULL) {
             $exception = $exception->getPrevious();
@@ -29,7 +29,7 @@ class ErrorController extends Controller_Abstract
                 // todo 各项目自定义
                 // log
                 $reason = '服务器忙, 请稍后再试[' . $exception->getCode() . ']';
-                $this->failed(10, 'failed', $reason);
+                $this->failed($exception->getCode(), 'failed', $reason);
                 return false;
         }
     }
