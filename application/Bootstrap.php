@@ -29,6 +29,7 @@ class Bootstrap extends Bootstrap_Abstract {
     {
         $loader = Yaf\Loader::getInstance();
         $loader->import(ROOT_PATH.'/vendor/autoload.php');
+        $loader->import(APP_PATH.'/library/helper.php');
     }
 
     public function _initConfig() {
